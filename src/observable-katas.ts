@@ -1,4 +1,4 @@
-import { concat, Observable, of, timer } from 'rxjs'
+import { concat, Observable, of, Subscription, timer } from 'rxjs'
 import { catchError, filter, map, reduce, startWith, take} from 'rxjs/operators';
 import { HttpClient } from './http-client.interface'
 
@@ -63,6 +63,34 @@ export class RXJSKatas {
    * You can read more about "creation operators" (just a fancy term for a function that creates an
    * observable) here: https://rxjs-dev.firebaseapp.com/guide/operators#creation-operators-list 
    * 
+   * After you create an observable, you can access the values emitted by the observable using the 
+   * .subscribe method.  This method invokes a callback function for each emission from the observable.
+   * 
+   * Try it out below!  Subscribe to the method with a function that logs each emission from the 
+   * observable to the console.
+   */
+
+  static subscribeToObservable<Type>(observableToSubscribe: Observable<Type>):void {
+    /* SOLUTION CODE */
+    observableToSubscribe.subscribe((item) => {console.log(item)});
+    /* END SOLUTION */
+  }
+
+  /**
+   * The .subscribe method returns a Subscription object.  In order to make your apps as memory-efficient
+   * as possible, it's best practice to unsubscribe from your observables once you're done with them. 
+   * You can do this by invoking the .unsubscribe method on the Subscription object.
+   * 
+   * Try it out below!  The following method receives a Subscription object.  Fill in the function with
+   * code that unsubscribes from the passed-in subscription.
+   */
+  static unsubscribeFromObservable<Type>(subscription: Subscription):void {
+    /* SOLUTION CODE */
+    subscription.unsubscribe();
+    /* END SOLUTION */
+  }
+
+  /**
    * Let's look now at the .pipe method.  This method allows us to create a sort of "observable pipeline". 
    * The .pipe method returns a new observable from an original observable by passing eachemission from 
    * the observable through a function or functions.  The basic syntax for this is:

@@ -5,7 +5,7 @@ import * as rxjsOps from 'rxjs/operators';
 import { Observable, of } from 'rxjs'
 import { HttpClientMock } from './httpClient.mock'
 
-let { first, map, filter, reduce, catchError } = rxjsOps
+let { first, map, filter, reduce, catchError, delay } = rxjsOps
 let httpClient;
 
 describe('RXJSKatas', () => {
@@ -21,13 +21,12 @@ describe('RXJSKatas', () => {
     spyOn(rxjsOps, 'reduce').and.callThrough();
     spyOn(rxjsOps, 'filter').and.callThrough();
     spyOn(rxjsOps, 'catchError').and.callThrough();
-
     map = rxjsOps.map;
     filter = rxjsOps.filter;
     reduce = rxjsOps.reduce;
     catchError = rxjsOps.catchError;
   })
-  describe('creating observables', () => {
+  describe('Creating observables', () => {
     it('createFromArray: should be able to create observables from an array using `of()`', () => {
       const actual = RXJSKatas.createFromArray([1, 2, 3]);
 
@@ -51,6 +50,25 @@ describe('RXJSKatas', () => {
 
       const expected = cold('(abc)', {a: 1, b: 2, c: 3});
       expect(actual).toBeObservable(expected)
+    })
+  })
+  describe('Subscribing to observables', () => {
+    it('subscribeToObservable: should subscribe to the passed-in observable', () => {
+      const obs = of(1,2,3,4,5);
+      spyOn(obs, 'subscribe').and.callThrough();
+      spyOn(console, 'log').and.callFake(() => {});
+      RXJSKatas.subscribeToObservable(obs);
+      expect(obs.subscribe).toHaveBeenCalled();
+      expect(console.log).toHaveBeenCalledTimes(5);
+    })
+    it('unsubscribeFromObservable: should unsubscribe from the passed-in observable', () => {
+      const obs = of(1,2,3,4,5).pipe(delay(1)); // delay for 1 tick so student code has a chance to unsubscribe.
+      spyOn(console, 'log').and.callFake(() => {});
+      const subscription = obs.subscribe((item) => {console.log(item)});
+      spyOn(subscription, 'unsubscribe').and.callThrough();
+      RXJSKatas.unsubscribeFromObservable(subscription);
+      expect(subscription.unsubscribe).toHaveBeenCalled();
+      expect(console.log).not.toHaveBeenCalled();
     })
   })
   describe('Piping observables', () => {
@@ -111,7 +129,7 @@ describe('RXJSKatas', () => {
         expectObservable(actual).toBe(expectedMarble, expectedValues);
       })
     })
-    
+
     it('createObservable123delay: should combine the latest values from two passed-in observables', () => {
       testScheduler.run(({expectObservable}) => {
         const actual = RXJSKatas.createObservable123delay();
