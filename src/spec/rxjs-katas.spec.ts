@@ -28,13 +28,13 @@ describe('RXJSKatas', () => {
     catchError = rxjsOps.catchError;
   })
   describe('creating observables', () => {
-    it('should be able to create observables from an array using `of()`', () => {
+    it('createFromArray: should be able to create observables from an array using `of()`', () => {
       const actual = RXJSKatas.createFromArray([1, 2, 3]);
 
       const expected = cold('(abc|)', {a: 1, b: 2, c: 3})
       expect(actual).toBeObservable(expected)
     })
-    it('should create observable by passing a function into the constructor.', () => {
+    it('createFromFunction: should create observable by passing a function into the constructor.', () => {
       const actual = RXJSKatas.createFromFunction((subscriber) => {
         subscriber.next(1);
         subscriber.next(2);
@@ -46,14 +46,14 @@ describe('RXJSKatas', () => {
       expect(actual).toBeObservable(expected)
     })
 
-    it('should create an observable that immediately emits 1, 2, 3.', () => {
+    it('createObservable123Immediate: should create an observable that immediately emits 1, 2, 3.', () => {
       const actual = RXJSKatas.createObservable123Immediate();
 
       const expected = cold('(abc)', {a: 1, b: 2, c: 3});
       expect(actual).toBeObservable(expected)
     })
 
-    it('should create observable that emits 1, 2, 3 at 50ms intervals', () => {
+    it('createObservable123delay: should create observable that emits 1, 2, 3 at 50ms intervals', () => {
       testScheduler.run(({expectObservable}) => {
         const actual = RXJSKatas.createObservable123delay();
         const expectedMarble = 'a 49ms b 49ms (c|)';
@@ -63,7 +63,7 @@ describe('RXJSKatas', () => {
     })
   })
   describe('Piping observables', () => {
-    it('should pipe an observable through a passed-in function', () => {
+    it('pipeObservableThroughFunction: should pipe an observable through a passed-in function', () => {
       testScheduler.run(({expectObservable}) => {
         const obs = of(1,2,3,4,5);
         const actual1 = RXJSKatas.pipeObservableThroughFunction<number>(obs, first);
@@ -78,7 +78,7 @@ describe('RXJSKatas', () => {
       })
     })
 
-    it('should use map to multiply each number in an observable by two', () => {
+    it('mapObservable: should use map to multiply each number in an observable by two', () => {
       testScheduler.run(({expectObservable}) => {
         const obs = of(1,2,3,4,5);
         const actual = RXJSKatas.mapObservable(obs);
@@ -90,7 +90,7 @@ describe('RXJSKatas', () => {
       })
     })
 
-    it('should use filter to filter out each number in an observable that\'s not divisible by two', () => {
+    it('filterObservable: should use filter to filter out each number in an observable that\'s not divisible by two', () => {
       testScheduler.run(({expectObservable}) => {
         const obs = of(1,2,3,4,5,6);
         const actual = RXJSKatas.filterObservable(obs);
@@ -102,7 +102,7 @@ describe('RXJSKatas', () => {
       })
     })
 
-    it('should use reduce to sum all the numbers in an observable', () => {
+    it('reduceObservable: should use reduce to sum all the numbers in an observable', () => {
       testScheduler.run(({expectObservable}) => {
         const obs = of(1,2,3,4,5);
         const actual = RXJSKatas.reduceObservable(obs);
@@ -115,13 +115,13 @@ describe('RXJSKatas', () => {
     })
   })
   describe('combination operators', () => {
-    it('should append a number onto the beginning of an observable', () => {
+    it('appendToStart: should append a number onto the beginning of an observable', () => {
       const obs = of(1,2,3);
       const actual = RXJSKatas.appendToStart<number>(obs, 0);
       const expected = cold('(abcd|)', {a: 0, b: 1, c: 2, d: 3});
       expect(actual).toBeObservable(expected)
     })
-    it('should combine the latest values from two passed-in observables', () => {
+    it('createObservable123delay: should combine the latest values from two passed-in observables', () => {
       testScheduler.run(({expectObservable}) => {
         const actual = RXJSKatas.createObservable123delay();
         const expectedMarble = 'a 49ms b 49ms (c|)';
@@ -134,31 +134,31 @@ describe('RXJSKatas', () => {
     beforeEach(() => {
       httpClient = spyOnAllFunctions(new HttpClientMock());
     })
-    it('should issue a get request to https://www.quotes4u.com/cervantes', () => {
+    it('issueGetRequest: should issue a get request to https://www.quotes4u.com/cervantes', () => {
       httpClient.get.and.callThrough();
       RXJSKatas.issueGetRequest(httpClient);
       expect(httpClient.get).toHaveBeenCalledOnceWith('https://www.quotes4u.com/cervantes');
     })
 
-    it('should issue a post request to https://www.quotes4u.com/hugo with the data: `{"quote": "Life is the flower for which love is the honey."}`', () => {
+    it('issuePostRequest: should issue a post request to https://www.quotes4u.com/hugo with the data: `{"quote": "Life is the flower for which love is the honey."}`', () => {
       httpClient.post.and.callThrough();
       RXJSKatas.issuePostRequest(httpClient);
       expect(httpClient.post).toHaveBeenCalledOnceWith('https://www.quotes4u.com/hugo', {quote: "Life is the flower for which love is the honey."});
     })
 
-    it('should issue a patch request to https://www.quotes4u.com/hugo/0 with the data: `{"quote": "Laughter is the sun that drives winter from the human face."}`', () => {
+    it('issuePatchRequest: should issue a patch request to https://www.quotes4u.com/hugo/0 with the data: `{"quote": "Laughter is the sun that drives winter from the human face."}`', () => {
       httpClient.patch.and.callThrough();
       RXJSKatas.issuePatchRequest(httpClient);
       expect(httpClient.patch).toHaveBeenCalledOnceWith('https://www.quotes4u.com/hugo/0', {quote: "Laughter is the sun that drives winter from the human face."});
     })
 
-    it('should issue a delete request to https://www.quotes4u.com/hugo/0', () => {
+    it('issueDeleteRequest: should issue a delete request to https://www.quotes4u.com/hugo/0', () => {
       httpClient.delete.and.callThrough();
       RXJSKatas.issueDeleteRequest(httpClient);
       expect(httpClient.delete).toHaveBeenCalledOnceWith('https://www.quotes4u.com/hugo/0');
     })
 
-    it('should issue a get request to https://www.quotes4u.com/hugo and catch any resulting errors', () => {
+    it('issueGetRequestCatchError: should issue a get request to https://www.quotes4u.com/hugo and catch any resulting errors', () => {
       httpClient.get.and.callThrough();
       RXJSKatas.issueGetRequestCatchError(httpClient, (err, caught) => of([]));
       expect(httpClient.get).toHaveBeenCalledOnceWith('https://www.quotes4u.com/hugo');
