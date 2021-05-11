@@ -31,9 +31,7 @@ export class RXJSKatas {
    * (which you can read about here:  https://rxjs-dev.firebaseapp.com/api/index/function/of).
    */
   static createFromArray(theArray: number[]):Observable<number> {
-    /* SOLUTION CODE */
-    return of(...theArray)
-    /* END SOLUTION */
+    return; // TODO: Replace this return value with the value specified in the comment above.
   }
 
   /**
@@ -43,9 +41,7 @@ export class RXJSKatas {
    * (remember to use the `new` keyword when invoking your constructor!)
    */
   static createFromFunction(theFunction): Observable<any> {
-    /* SOLUTION CODE */
-    return new Observable(theFunction);
-    /* END SOLUTION */
+    return; // TODO: Replace this return value with the value specified in the comment above.
   }
 
   /**
@@ -58,13 +54,7 @@ export class RXJSKatas {
    * observable to emit using `subscriber.next()`.
    */
   static createObservable123Immediate():Observable<number> {
-    /* SOLUTION CODE */
-    return new Observable((subscriber) => {
-      subscriber.next(1);
-      subscriber.next(2);
-      subscriber.next(3);
-    })
-    /* END SOLUTION */
+    return; // TODO: Replace this return value with the value specified in the comment above.
   }
 
   /**
@@ -86,9 +76,7 @@ export class RXJSKatas {
    * result of piping `observableToPipe` through `pipingFunction`.
    */
   static pipeObservableThroughFunction<Type>(observableToPipe: Observable<Type>, pipingFunction: Function): Observable<Type> {
-    /* SOLUTION CODE */
-    return observableToPipe.pipe(pipingFunction());
-    /* END SOLUTION */
+    return; // TODO: Replace this return value with the value specified in the comment above.
   }
 
   /**
@@ -117,9 +105,7 @@ export class RXJSKatas {
   */
 
   static mapObservable(originalObs: Observable<number>): Observable<number> {
-  /* SOLUTION CODE */
-    return originalObs.pipe(map(num => num * 2));
-  /* END SOLUTION */
+    return; // TODO: Replace this return value with the value specified in the comment above.
   }
 
   /**
@@ -129,9 +115,7 @@ export class RXJSKatas {
    */
   
   static appendToStart<Type>(observableToAppend: Observable<Type>, numberToAppend:Type):Observable<Type> {
-  /* SOLUTION CODE */
-    return observableToAppend.pipe(startWith(numberToAppend));
-  /* END SOLUTION */
+    return; // TODO: Replace this return value with the value specified in the comment above.
   }
 
   /**
@@ -140,9 +124,7 @@ export class RXJSKatas {
    */
 
   static filterObservable(observableToPipe: Observable<number>): Observable<number> {
-    /* SOLUTION CODE */
-    return observableToPipe.pipe(filter((num: number, index: number) => num % 2 === 0));
-    /* END SOLUTION */
+    return; // TODO: Replace this return value with the value specified in the comment above.
   }
 
 
@@ -151,9 +133,7 @@ export class RXJSKatas {
    */
 
   static reduceObservable(observableToPipe: Observable<number>): Observable<number> {
-    /* SOLUTION CODE */
-    return observableToPipe.pipe(reduce((acc: number, cur: number, idx: number) => acc + cur, 0));
-    /* END SOLUTION */
+    return; // TODO: Replace this return value with the value specified in the comment above.
   }
 
   /**
@@ -164,12 +144,7 @@ export class RXJSKatas {
    */
 
   static createObservable123delay():Observable<number> {
-    /* SOLUTION CODE */
-    return  timer(0, 50).pipe(
-      map((num, idx) => idx + 1),
-      take(3)
-    );
-    /* END SOLUTION */
+    return; // TODO: Replace this return value with the value specified in the comment above.
   }
   
   /**
@@ -188,9 +163,7 @@ export class RXJSKatas {
    */
 
   static issueGetRequest(httpClient: HttpClient):Observable<object> {
-    /* SOLUTION CODE */
-    return httpClient.get('https://www.quotes4u.com/cervantes');
-    /* END SOLUTION */
+    return; // TODO: Replace this return value with the value specified in the comment above.
   }
 
   /**
@@ -200,9 +173,7 @@ export class RXJSKatas {
    */
 
   static issuePostRequest(httpClient: HttpClient):Observable<object> {
-    /* SOLUTION CODE */
-    return httpClient.post('https://www.quotes4u.com/hugo', {quote: 'Life is the flower for which love is the honey.'});
-    /* END SOLUTION */
+    return; // TODO: Replace this return value with the value specified in the comment above.
   }
 
   /**
@@ -210,9 +181,7 @@ export class RXJSKatas {
    * human face.'}` to the URL `https://www.quotes4u.com/hugo/0` to update our previous quote.
    */
   static issuePatchRequest(httpClient: HttpClient):Observable<object> {
-    /* SOLUTION CODE */
-    return httpClient.patch('https://www.quotes4u.com/hugo/0', {quote: 'Laughter is the sun that drives winter from the human face.'});
-    /* END SOLUTION */
+    return; // TODO: Replace this return value with the value specified in the comment above.
   }
   
   /**
@@ -220,9 +189,7 @@ export class RXJSKatas {
    * `https://www.quotes4u.com/hugo/0`
    */
   static issueDeleteRequest(httpClient: HttpClient):Observable<object> {
-    /* SOLUTION CODE */
-    return httpClient.delete('https://www.quotes4u.com/hugo/0');
-    /* END SOLUTION */
+    return; // TODO: Replace this return value with the value specified in the comment above.
   }
 
   /**
@@ -234,11 +201,6 @@ export class RXJSKatas {
    * your request through `catchError`!)
    */
   static issueGetRequestCatchError(httpClient: HttpClient, errorHandler: (err, caught) => Observable<object>):Observable<object> {
-    /* SOLUTION CODE */ 
-    return httpClient.get('https://www.quotes4u.com/hugo')
-    .pipe(
-      catchError(errorHandler)
-    );
-    /* END SOLUTION */
+    return; // TODO: Replace this return value with the value specified in the comment above. 
   }
 }
