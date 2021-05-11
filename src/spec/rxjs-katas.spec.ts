@@ -53,12 +53,6 @@ describe('RXJSKatas', () => {
       expect(actual).toBeObservable(expected)
     })
 
-    // it('should map an observable to multiply each item by 2.', () => {
-    //   const actual = RXJSKatas.multiplyObservableByTwo(of(1,2,3,4));
-    //   const expected = cold('(abcd|)', {a: 2, b: 4, c: 6, d: 8});
-    //   expect(actual).toBeObservable(expected)
-    // })
-
     it('should create observable that emits 1, 2, 3 at 50ms intervals', () => {
       testScheduler.run(({expectObservable}) => {
         const actual = RXJSKatas.createObservable123delay();
@@ -83,40 +77,6 @@ describe('RXJSKatas', () => {
         expectObservable(actual2).toBe(expectedMarble2, expectedValues2);
       })
     })
-    // it('should map the observable using a passed-in mapping callback', () => {
-    //   testScheduler.run(({expectObservable}) => {
-    //     const obs = of(1,2,3,4,5);
-    //     const actual = RXJSKatas.mapObservableWithFunction<number>(obs, (num: number, idx: number) => num*2);
-    //     const expectedMarble = '(abcde|)';
-    //     const expectedValues = {a: 2, b: 4, c: 6, d: 8, e: 10};
-
-    //     expect(map).toHaveBeenCalled();
-    //     expectObservable(actual).toBe(expectedMarble, expectedValues);
-    //   })
-    // })
-    // it('should filter the observable through a passed-in filter callback', () => {
-    //   testScheduler.run(({expectObservable}) => {
-    //     const obs = of(1,2,3,4,5);
-    //     const actual = RXJSKatas.filterObservableWithFunction<number>(obs, (num: number, idx: number) => (num % 2 === 0));
-    //     const expectedMarble = '(bd|)';
-    //     const expectedValues = { b: 2, d: 4, };
-
-    //     expect(filter).toHaveBeenCalled();
-    //     expectObservable(actual).toBe(expectedMarble, expectedValues);
-    //   })
-    // })
-
-    // it('should reduce the observable using a passed-in reduce callback', () => {
-    //   testScheduler.run(({expectObservable}) => {
-    //     const obs = of(1,2,3,4,5);
-    //     const actual = RXJSKatas.reduceObservableWithFunction<number>(obs, (acc: number, cur: number, idx: number) => acc + cur);
-    //     const expectedMarble = '(a|)';
-    //     const expectedValues = { a: 15 };
-
-    //     expect(reduce).toHaveBeenCalled();
-    //     expectObservable(actual).toBe(expectedMarble, expectedValues);
-    //   })
-    // })
 
     it('should use map to multiply each number in an observable by two', () => {
       testScheduler.run(({expectObservable}) => {
