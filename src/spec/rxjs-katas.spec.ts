@@ -52,15 +52,6 @@ describe('RXJSKatas', () => {
       const expected = cold('(abc)', {a: 1, b: 2, c: 3});
       expect(actual).toBeObservable(expected)
     })
-
-    it('createObservable123delay: should create observable that emits 1, 2, 3 at 50ms intervals', () => {
-      testScheduler.run(({expectObservable}) => {
-        const actual = RXJSKatas.createObservable123delay();
-        const expectedMarble = 'a 49ms b 49ms (c|)';
-        const expectedValues = {a: 1, b: 2, c: 3};
-        expectObservable(actual).toBe(expectedMarble, expectedValues);
-      })
-    })
   })
   describe('Piping observables', () => {
     it('pipeObservableThroughFunction: should pipe an observable through a passed-in function', () => {
@@ -90,6 +81,13 @@ describe('RXJSKatas', () => {
       })
     })
 
+    it('appendToStart: should append a number onto the beginning of an observable', () => {
+      const obs = of(1,2,3);
+      const actual = RXJSKatas.appendToStart<number>(obs, 0);
+      const expected = cold('(abcd|)', {a: 0, b: 1, c: 2, d: 3});
+      expect(actual).toBeObservable(expected)
+    })
+
     it('filterObservable: should use filter to filter out each number in an observable that\'s not divisible by two', () => {
       testScheduler.run(({expectObservable}) => {
         const obs = of(1,2,3,4,5,6);
@@ -113,14 +111,7 @@ describe('RXJSKatas', () => {
         expectObservable(actual).toBe(expectedMarble, expectedValues);
       })
     })
-  })
-  describe('combination operators', () => {
-    it('appendToStart: should append a number onto the beginning of an observable', () => {
-      const obs = of(1,2,3);
-      const actual = RXJSKatas.appendToStart<number>(obs, 0);
-      const expected = cold('(abcd|)', {a: 0, b: 1, c: 2, d: 3});
-      expect(actual).toBeObservable(expected)
-    })
+    
     it('createObservable123delay: should combine the latest values from two passed-in observables', () => {
       testScheduler.run(({expectObservable}) => {
         const actual = RXJSKatas.createObservable123delay();

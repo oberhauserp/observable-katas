@@ -3,15 +3,6 @@ import { catchError, filter, map, reduce, startWith, take} from 'rxjs/operators'
 import { HttpClient } from './http-client.interface'
 
 /**
- * Welcome to the RXJS Kata!  First off, what is a code kata?  Wikipedia explains:
- * 
- *   "Kata is a term used by some programmers in the Software Craftsmanship movement. Computer programmers
- *    who call themselves "Software Craftsmen" will write 'Kata' - small snippets of code that they write
- *    in one sitting, sometimes repeatedly, often daily, in order to build muscle memory and practise 
- *    their craft." 
- * 
- * ...and that's exactly what you'll do here!  
- * 
  * Instructions:  
  * 
  * The class below (RXJSKatas) contains a number of empty methods.  These methods are tested in a test 
