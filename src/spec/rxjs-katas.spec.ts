@@ -186,10 +186,10 @@ describe('RXJSKatas', () => {
       expect(httpClient.post).toHaveBeenCalledOnceWith('https://www.quotes4u.com/hugo', {quote: "Life is the flower for which love is the honey."});
     })
 
-    it('should issue a patch request to https://www.quotes4u.com/hugo with the data: `{"quote": "Laughter is the sun that drives winter from the human face."}`', () => {
+    it('should issue a patch request to https://www.quotes4u.com/hugo/0 with the data: `{"quote": "Laughter is the sun that drives winter from the human face."}`', () => {
       httpClient.patch.and.callThrough();
       RXJSKatas.issuePatchRequest(httpClient);
-      expect(httpClient.patch).toHaveBeenCalledOnceWith('https://www.quotes4u.com/hugo', {quote: "Laughter is the sun that drives winter from the human face."});
+      expect(httpClient.patch).toHaveBeenCalledOnceWith('https://www.quotes4u.com/hugo/0', {quote: "Laughter is the sun that drives winter from the human face."});
     })
 
     it('should issue a delete request to https://www.quotes4u.com/hugo/0', () => {
