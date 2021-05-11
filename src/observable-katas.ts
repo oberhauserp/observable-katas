@@ -1,4 +1,4 @@
-import { concat, Observable, of, timer } from 'rxjs'
+import { concat, Observable, of, Subscription, timer } from 'rxjs'
 import { catchError, filter, map, reduce, startWith, take} from 'rxjs/operators';
 import { HttpClient } from './http-client.interface'
 
@@ -56,12 +56,35 @@ export class RXJSKatas {
   static createObservable123Immediate():Observable<number> {
     return; // TODO: Replace this return value with the value specified in the comment above.
   }
-
   /**
    * There are many more ways to create observables (e.g. from DOM events, from ajax requests, etc.)
    * You can read more about "creation operators" (just a fancy term for a function that creates an
    * observable) here: https://rxjs-dev.firebaseapp.com/guide/operators#creation-operators-list 
    * 
+   * After you create an observable, you can access the values emitted by the observable using the 
+   * .subscribe method.  This method invokes a callback function for each emission from the observable.
+   * 
+   * Try it out below!  Subscribe to the method with a function that logs each emission from the 
+   * observable to the console.
+   */
+
+  static subscribeToObservable<Type>(observableToSubscribe: Observable<Type>):void {
+    // TODO: Subscribe to the passed-in observable.
+  }
+
+  /**
+   * The .subscribe method returns a Subscription object.  In order to make your apps as memory-efficient
+   * as possible, it's best practice to unsubscribe from your observables once you're done with them. 
+   * You can do this by invoking the .unsubscribe method on the Subscription object.
+   * 
+   * Try it out below!  The following method receives a Subscription object.  Fill in the function with
+   * code that unsubscribes from the passed-in subscription.
+   */
+  static unsubscribeFromObservable<Type>(subscription: Subscription):void {
+    return; // TODO: Unsubscribe the passed-in subscription
+  }
+
+  /**
    * Let's look now at the .pipe method.  This method allows us to create a sort of "observable pipeline". 
    * The .pipe method returns a new observable from an original observable by passing eachemission from 
    * the observable through a function or functions.  The basic syntax for this is:
@@ -78,7 +101,7 @@ export class RXJSKatas {
   static pipeObservableThroughFunction<Type>(observableToPipe: Observable<Type>, pipingFunction: Function): Observable<Type> {
     return; // TODO: Replace this return value with the value specified in the comment above.
   }
-
+  
   /**
   * .pipe is commonly used for applying rxjs "transformation operators".  Transformation operators, when
   *  applied to an existing observable, will return a new observable containing the contents of the 
