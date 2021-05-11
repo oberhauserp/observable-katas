@@ -1,0 +1,26 @@
+{
+  "name": "observable-katas",
+  "version": "1.0.0",
+  "description": "observables exercises",
+  "main": "index.js",
+  "scripts": {
+    "compile": "npx tsc --outdir dist",
+    "test": "npm run compile && npx jasmine dist/**/*.spec.js --config=jasmine/support/jasmine.json",
+    "start": "npm run compile && node dist/observable-katas.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "rxjs": "^6.5.3"
+  },
+  "devDependencies": {
+    "@types/jasmine": "^3.6.10",
+    "jasmine": "^3.7.0",
+    "jasmine-marbles": "^0.8.1",
+    "jasmine-spec-reporter": "^7.0.0",
+    "jasmine-ts": "^0.3.3",
+    "jasmine-ts-console-reporter": "^3.1.1",
+    "karma": "^6.3.2",
+    "ts-node": "^9.1.1"
+  }
+}
