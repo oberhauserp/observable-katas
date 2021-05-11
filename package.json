@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "compile": "npx tsc --outdir dist",
-    "test": "npm run compile && npx jasmine dist/**/*.spec.js --config=jasmine/support/jasmine.json",
+    "test": "npm run compile && npx jasmine dist/**/*.spec.js --config=jasmine/support/jasmine.json --fail-fast=true",
     "start": "npm run compile && node dist/observable-katas.js"
   },
   "author": "",
