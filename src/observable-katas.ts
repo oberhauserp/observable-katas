@@ -147,9 +147,9 @@ export class RXJSKatas {
    * number `numberToAppend` to the observable `observableToAppend`.
    */
   
-  static appendToStart<Type>(observableToAppend: Observable<Type>, numberToAppend:Type):Observable<Type> {
+  static appendToStart<Type>(obs: Observable<Type>, thingToAppend:Type):Observable<Type> {
   /* SOLUTION CODE */
-    return observableToAppend.pipe(startWith(numberToAppend));
+    return obs.pipe(startWith(thingToAppend));
   /* END SOLUTION */
   }
 
@@ -158,9 +158,9 @@ export class RXJSKatas {
    * function. 
    */
 
-  static filterObservable(observableToPipe: Observable<number>): Observable<number> {
+  static filterObservable(observableToFilter: Observable<number>): Observable<number> {
     /* SOLUTION CODE */
-    return observableToPipe.pipe(filter((num: number, index: number) => num % 2 === 0));
+    return observableToFilter.pipe(filter((num: number, index: number) => num % 2 === 0));
     /* END SOLUTION */
   }
 
@@ -169,9 +169,9 @@ export class RXJSKatas {
    * Next, use the reduce operator to filter the items in an observable using a callback function.
    */
 
-  static reduceObservable(observableToPipe: Observable<number>): Observable<number> {
+  static reduceObservable(observableToReduce: Observable<number>): Observable<number> {
     /* SOLUTION CODE */
-    return observableToPipe.pipe(reduce((acc: number, cur: number, idx: number) => acc + cur, 0));
+    return observableToReduce.pipe(reduce((acc: number, cur: number, idx: number) => acc + cur, 0));
     /* END SOLUTION */
   }
 
