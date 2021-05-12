@@ -137,7 +137,7 @@ export class RXJSKatas {
    * number `numberToAppend` to the observable `observableToAppend`.
    */
   
-  static appendToStart<Type>(observableToAppend: Observable<Type>, numberToAppend:Type):Observable<Type> {
+  static appendToStart<Type>(obs: Observable<Type>, numberToAppend:Type):Observable<Type> {
     return; // TODO: Replace this return value with the value specified in the comment above.
   }
 
