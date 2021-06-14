@@ -31,7 +31,7 @@ export class RXJSKatas {
    * (which you can read about here:  https://rxjs-dev.firebaseapp.com/api/index/function/of).
    */
   static createFromArray(theArray: number[]):Observable<number> {
-    return; // TODO: Replace this return value with the value specified in the comment above.
+    return of(...theArray); // TODO: Replace this return value with the value specified in the comment above.
   }
 
   /**
@@ -41,7 +41,7 @@ export class RXJSKatas {
    * (remember to use the `new` keyword when invoking your constructor!)
    */
   static createFromFunction(theFunction): Observable<any> {
-    return; // TODO: Replace this return value with the value specified in the comment above.
+    return new Observable(theFunction); // TODO: Replace this return value with the value specified in the comment above.
   }
 
   /**
@@ -54,7 +54,11 @@ export class RXJSKatas {
    * observable to emit using `subscriber.next()`.
    */
   static createObservable123Immediate():Observable<number> {
-    return; // TODO: Replace this return value with the value specified in the comment above.
+    return new Observable(subscriber => {
+      subscriber.next(1);
+      subscriber.next(2);
+      subscriber.next(3);
+    }); // TODO: Replace this return value with the value specified in the comment above.
   }
   /**
    * There are many more ways to create observables (e.g. from DOM events, from ajax requests, etc.)
@@ -69,7 +73,7 @@ export class RXJSKatas {
    */
 
   static subscribeToObservable<Type>(observableToSubscribe: Observable<Type>):void {
-    // TODO: Subscribe to the passed-in observable.
+    observableToSubscribe.subscribe((thing) => console.log(thing))// TODO: Subscribe to the passed-in observable.
   }
 
   /**
@@ -81,7 +85,7 @@ export class RXJSKatas {
    * code that unsubscribes from the passed-in subscription.
    */
   static unsubscribeFromObservable<Type>(subscription: Subscription):void {
-    return; // TODO: Unsubscribe the passed-in subscription
+    return subscription.unsubscribe(); // TODO: Unsubscribe the passed-in subscription
   }
 
   /**
@@ -99,7 +103,7 @@ export class RXJSKatas {
    * result of piping `observableToPipe` through `pipingFunction`.
    */
   static pipeObservableThroughFunction<Type>(observableToPipe: Observable<Type>, pipingFunction: Function): Observable<Type> {
-    return; // TODO: Replace this return value with the value specified in the comment above.
+    return observableToPipe.pipe(pipingFunction());
   }
   
   /**
@@ -128,7 +132,7 @@ export class RXJSKatas {
   */
 
   static mapObservable(originalObs: Observable<number>): Observable<number> {
-    return; // TODO: Replace this return value with the value specified in the comment above.
+    return originalObs.pipe(map(num => num * 2)); // TODO: Replace this return value with the value specified in the comment above.
   }
 
   /**
@@ -138,7 +142,7 @@ export class RXJSKatas {
    */
   
   static appendToStart<Type>(obs: Observable<Type>, numberToAppend:Type):Observable<Type> {
-    return; // TODO: Replace this return value with the value specified in the comment above.
+    return obs.pipe(startWith(numberToAppend)); // TODO: Replace this return value with the value specified in the comment above.
   }
 
   /**
@@ -147,7 +151,7 @@ export class RXJSKatas {
    */
 
   static filterObservable(observableToPipe: Observable<number>): Observable<number> {
-    return; // TODO: Replace this return value with the value specified in the comment above.
+    return observableToPipe.pipe(filter(x => x % 2 === 0)); // TODO: Replace this return value with the value specified in the comment above.
   }
 
 
@@ -156,7 +160,7 @@ export class RXJSKatas {
    */
 
   static reduceObservable(observableToPipe: Observable<number>): Observable<number> {
-    return; // TODO: Replace this return value with the value specified in the comment above.
+    return observableToPipe.pipe(reduce((acc,curr) => acc + curr,0)); // TODO: Replace this return value with the value specified in the comment above.
   }
 
   /**
@@ -167,9 +171,9 @@ export class RXJSKatas {
    */
 
   static createObservable123delay():Observable<number> {
-    return; // TODO: Replace this return value with the value specified in the comment above.
-  }
+    return timer(0,50).pipe(map((idx) => idx+1),take(3)) // TODO: Replace this return value with the value specified in the comment above.
   
+  }
   /**
    * Angular uses observables to manage asynchronous data flow.  One common example of this is interacting
    * with back-end services via HTTP.  Angular even comes with a build-in service for managing network 
@@ -186,7 +190,7 @@ export class RXJSKatas {
    */
 
   static issueGetRequest(httpClient: HttpClient):Observable<object> {
-    return; // TODO: Replace this return value with the value specified in the comment above.
+    return httpClient.get('https://www.quotes4u.com/cervantes');
   }
 
   /**
@@ -196,7 +200,7 @@ export class RXJSKatas {
    */
 
   static issuePostRequest(httpClient: HttpClient):Observable<object> {
-    return; // TODO: Replace this return value with the value specified in the comment above.
+    return httpClient.post(`https://www.quotes4u.com/hugo`, Object({quote: 'Life is the flower for which love is the honey.'})); // TODO: Replace this return value with the value specified in the comment above.
   }
 
   /**
@@ -204,7 +208,7 @@ export class RXJSKatas {
    * human face.'}` to the URL `https://www.quotes4u.com/hugo/0` to update our previous quote.
    */
   static issuePatchRequest(httpClient: HttpClient):Observable<object> {
-    return; // TODO: Replace this return value with the value specified in the comment above.
+    return httpClient.patch('https://www.quotes4u.com/hugo/0',Object({quote: 'Laughter is the sun that drives winter from the human face.'})); // TODO: Replace this return value with the value specified in the comment above.
   }
   
   /**
@@ -212,7 +216,7 @@ export class RXJSKatas {
    * `https://www.quotes4u.com/hugo/0`
    */
   static issueDeleteRequest(httpClient: HttpClient):Observable<object> {
-    return; // TODO: Replace this return value with the value specified in the comment above.
+    return httpClient.delete("https://www.quotes4u.com/hugo/0"); // TODO: Replace this return value with the value specified in the comment above.
   }
 
   /**
@@ -224,6 +228,6 @@ export class RXJSKatas {
    * your request through `catchError`!)
    */
   static issueGetRequestCatchError(httpClient: HttpClient, errorHandler: (err, caught) => Observable<object>):Observable<object> {
-    return; // TODO: Replace this return value with the value specified in the comment above. 
+    return httpClient.get(`https://www.quotes4u.com/hugo`).pipe(catchError(errorHandler)); // TODO: Replace this return value with the value specified in the comment above. 
   }
 }
